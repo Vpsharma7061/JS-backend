@@ -1,0 +1,59 @@
+[
+    {
+        "name": "New Delhi",
+        "title": "New Delhi",
+        "description": "New Delhi, the capital of India, is a vibrant city known for its rich history and cultural heritage. It is home to numerous historic monuments, government buildings, and vibrant markets.",
+        "image": "https://media.gettyimages.com/id/506812641/photo/india-gate.jpg?s=2048x2048&w=gi&k=20&c=czPojubj7yl33ztGOlUChwPJD2cfamQRKzCypE66aUQ=",
+        "landmarks": [
+            "India Gate",
+            "Red Fort",
+            "Qutub Minar",
+            "Lotus Temple",
+            "Akshardham Temple"
+        ]
+    },
+    {
+        "name": "Gurugram",
+        "title": "Gurugram",
+        "description": "Gurugram, also known as Gurgaon, is a financial and technology hub located near New Delhi. It is famous for its modern skyscrapers, shopping malls, and vibrant nightlife.",
+        "image": "https://media.gettyimages.com/id/506812641/photo/india-gate.jpg?s=2048x2048&w=gi&k=20&c=czPojubj7yl33ztGOlUChwPJD2cfamQRKzCypE66aUQ=",
+        "landmarks": [
+            "Kingdom of Dreams",
+            "Cyber Hub",
+            "Damdama Lake"
+        ]
+    },
+    {
+        "name": "Faridabad",
+        "title": "Faridabad",
+        "description": "Faridabad is an industrial city in the state of Haryana. It is known for its greenery, historic sites, and being a significant commercial hub in the region.",
+        "image": "https://media.gettyimages.com/id/506812641/photo/india-gate.jpg?s=2048x2048&w=gi&k=20&c=czPojubj7yl33ztGOlUChwPJD2cfamQRKzCypE66aUQ=",
+        "landmarks": [
+            "Surajkund",
+            "Badkhal Lake",
+            "ISKCON Temple"
+        ]
+    },
+    {
+        "name": "Ghaziabad",
+        "title": "Ghaziabad",
+        "description": "Ghaziabad is a bustling city in Uttar Pradesh, often referred to as the 'Gateway to Uttar Pradesh.' It has a mix of historical attractions and modern infrastructure.",
+        "image": "https://media.gettyimages.com/id/506812641/photo/india-gate.jpg?s=2048x2048&w=gi&k=20&c=czPojubj7yl33ztGOlUChwPJD2cfamQRKzCypE66aUQ=",
+        "landmarks": [
+            "Siddhivinayak Temple",
+            "City Forest",
+            "Dr. Ram Manohar Lohia Park"
+        ]
+    },
+    {
+        "name": "Noida",
+        "title": "Noida",
+        "description": "Noida is a planned city located in Uttar Pradesh. It is known for its contemporary lifestyle, IT parks, shopping complexes, and excellent infrastructure.",
+        "image": "https://media.gettyimages.com/id/506812641/photo/india-gate.jpg?s=2048x2048&w=gi&k=20&c=czPojubj7yl33ztGOlUChwPJD2cfamQRKzCypE66aUQ=",
+        "landmarks": [
+            "Great India Place",
+            "Noida Film City",
+            "Okhla Bird Sanctuary"
+        ]
+    }
+]

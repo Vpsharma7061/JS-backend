@@ -1,0 +1,7 @@
+[
+    {"id": "new-delhi", "name": "New Delhi", "lat": 28.6139, "lng": 77.2090},
+    {"id": "gurugram", "name": "Gurugram", "lat": 28.4595, "lng": 77.0266},
+    {"id": "faridabad", "name": "Faridabad", "lat": 28.4089, "lng": 77.3178},
+    {"id": "ghaziabad", "name": "Ghaziabad", "lat": 28.6692, "lng": 77.4538},
+    {"id": "noida", "name": "Noida", "lat": 28.5355, "lng": 77.3910}
+]
