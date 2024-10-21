@@ -1,34 +1,41 @@
+/* Map styling */
 #map {
     height: 90vh;
-    width: 80%;
+    width: calc(100% - 17%); /* Adjusts the width dynamically based on the button container's width */
     margin-bottom: 10px;
     position: relative;
     float: right;
+    transition: width 0.3s ease; /* Smooth transition when the sidebar expands */
 }
 
+/* Button Container styling */
 #button-container {
     display: flex;
     flex-direction: column;
     position: absolute;
     left: 0;
     z-index: 1000;
-    height: 87vh;
+    height: 90vh;
     width: 6%;
-    background-color: rgb(239, 231, 231);
-    transition: width 0.3s ease;
+    background-color: #a8afbe;
+    transition: width 0.3s ease; /* Smooth transition for expansion */
     padding: 10px;
     align-items: flex-start;
+    box-sizing: border-box; /* Include padding in the width calculation */
+    overflow: hidden; /* Prevent overflow issues */
 }
 
 #button-container.expanded {
     width: 17%;
 }
 
+/* Button Group styling */
 #button-group {
     display: flex;
     margin-bottom: 20px;
 }
 
+/* Location Button styling */
 #location-button {
     background-color: yellow;
     border: none;
@@ -39,9 +46,10 @@
     margin-right: 10px;
 }
 
+/* Toggle Button styling */
 #toggle-button {
-    display: none;
-    background-color: lightblue;
+    display: none; /* Hidden by default */
+    background-color: yellow;
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -49,10 +57,12 @@
     font-size: 16px;
 }
 
+/* Arrow Toggle styling */
+/* Arrow Toggle styling */
 #arrow-toggle {
     position: absolute;
     top: 50%;
-    right: -15px;
+    right: 1px; /* Adjusted to ensure it's always visible */
     width: 30px;
     height: 30px;
     background-color: #007bff;
@@ -68,19 +78,21 @@
 }
 
 #button-container.expanded #arrow-toggle {
-    right: -20px;
+    right: 1px; /* Keeps the toggle button in place when expanded */
 }
 
 #arrow-toggle:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker color on hover */
 }
 
+
+/* Cities List styling */
 #cities-list {
-    display: none;
-    margin-top: 20px;
+    display: none; /* Hidden by default */
+    margin-top: 10px;
     padding: 10px;
     width: 100%;
-    background-color: rgb(239, 231, 231);
+    background-color: #a8afbe;
 }
 
 #cities-list ul {
@@ -91,7 +103,7 @@
 #cities-list li {
     margin: 5px 0;
     cursor: pointer;
-    color: rgb(85, 171, 224);
+    color: rgb(13, 92, 141);
     font-weight: bold;
     font-size: 16px;
     padding: 8px;
@@ -100,19 +112,16 @@
 }
 
 #cities-list li:hover {
-    background-color: rgba(85, 171, 224, 0.2);
-}
-
-.delhi-info {
-    position: absolute;
-    right: -400px;
-    top: 0;
-    width: 400px;
-    height: 100vh;
-    background-color: rgb(85, 204, 225);
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    transition: right 0.3s ease;
+    background-color: rgba(222, 236, 34, 0.475); /* Light blue background on hover */
 }
 
 
+
+/* Utility classes */
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}

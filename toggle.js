@@ -1,68 +1,41 @@
-function toggleExpand() {
+document.addEventListener('DOMContentLoaded', function () {
     const buttonContainer = document.getElementById('button-container');
     const citiesList = document.getElementById('cities-list');
     const toggleButton = document.getElementById('toggle-button');
     const toggleArrow = document.getElementById('toggle-arrow');
     const arrowToggle = document.getElementById('arrow-toggle');
 
-    buttonContainer.classList.toggle('expanded');
-    const isExpanded = buttonContainer.classList.contains('expanded');
-
-    localStorage.setItem('isExpanded', isExpanded);
-
-    if (isExpanded) {
-        arrowToggle.innerHTML = '&larr;';
-        toggleButton.style.display = 'inline-block';
-        citiesList.style.display = 'block';
-        toggleArrow.innerHTML = '▲';
-    } else {
-        arrowToggle.innerHTML = '&rarr;';
-        toggleButton.style.display = 'none';
-        citiesList.style.display = 'none';
-        toggleArrow.innerHTML = '▼';
+    // Function to update the UI based on the expanded state
+    function updateUI(isExpanded) {
+        buttonContainer.classList.toggle('expanded', isExpanded);
+        arrowToggle.innerHTML = isExpanded ? '&larr;' : '&rarr;';
+        toggleButton.style.display = isExpanded ? 'inline-block' : 'none';
+        citiesList.style.display = isExpanded ? 'block' : 'none';
+        toggleArrow.innerHTML = isExpanded ? '▲' : '▼'; // Update arrow based on expansion
     }
-}
 
-
-window.addEventListener('load', function () {
-    const isExpanded = localStorage.getItem('isExpanded') === 'true';
-    const buttonContainer = document.getElementById('button-container');
-    const citiesList = document.getElementById('cities-list');
-    const toggleButton = document.getElementById('toggle-button');
-    const toggleArrow = document.getElementById('toggle-arrow');
-    const arrowToggle = document.getElementById('arrow-toggle');
-
-    if (isExpanded) {
-        buttonContainer.classList.add('expanded');
-        arrowToggle.innerHTML = '&larr;';
-        toggleButton.style.display = 'inline-block';
-        citiesList.style.display = 'block';
-        toggleArrow.innerHTML = '▲';
-    } else {
-        buttonContainer.classList.remove('expanded');
-        arrowToggle.innerHTML = '&rarr;';
-        toggleButton.style.display = 'none';
-        citiesList.style.display = 'none';
-        toggleArrow.innerHTML = '▼';
+    // Function to toggle the expanded state and update the UI
+    function toggleExpand() {
+        const isExpanded = !buttonContainer.classList.contains('expanded');
+        localStorage.setItem('isExpanded', isExpanded);
+        updateUI(isExpanded);
     }
+
+    // Initialize the UI state based on localStorage when the page loads
+    window.addEventListener('load', () => updateUI(localStorage.getItem('isExpanded') === 'true'));
+
+    // Attach event listeners for UI interactions
+    arrowToggle.addEventListener('click', toggleExpand);
+    document.getElementById('location-button').addEventListener('click', toggleExpand);
+
+    // Toggle visibility of the cities list independently
+    toggleButton.addEventListener('click', () => {
+        const isCitiesListVisible = citiesList.style.display === 'block';
+        citiesList.style.display = isCitiesListVisible ? 'none' : 'block';
+        toggleArrow.innerHTML = isCitiesListVisible ? '▼' : '▲'; // Update arrow based on visibility
+    });
+
+    // Ensure elements are hidden initially
+    toggleButton.style.display = 'none'; // Ensure toggle button is hidden initially
+    citiesList.style.display = 'none'; // Ensure cities list is hidden initially
 });
-
-document.getElementById('arrow-toggle').addEventListener('click', toggleExpand);
-document.getElementById('location-button').addEventListener('click', toggleExpand);
-
-document.getElementById('toggle-button').addEventListener('click', function () {
-    const citiesList = document.getElementById('cities-list');
-    const toggleArrow = document.getElementById('toggle-arrow');
-
-    if (citiesList.style.display === 'block') {
-        citiesList.style.display = 'none';
-        toggleArrow.innerHTML = '▼';
-    } else {
-        citiesList.style.display = 'block';
-        toggleArrow.innerHTML = '▲';
-    }
-});
-
-
-document.getElementById('toggle-button').style.display = 'none';
-document.getElementById('cities-list').style.display = 'none';

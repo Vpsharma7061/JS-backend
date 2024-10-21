@@ -10,7 +10,7 @@ function initMap() {
         center: initialLocation,
     });
 
-    const customIcon = 'pin.png'; 
+    const customIcon = 'pin.png';
 
     marker = new google.maps.Marker({
         position: initialLocation,
@@ -44,8 +44,18 @@ function attachMarkerListeners() {
 
 function loadCityData() {
     fetch('cities.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
+            if (!Array.isArray(data) || data.length === 0) {
+                console.warn('City data is not an array or is empty');
+                return;
+            }
+
             const cityList = document.getElementById('cities-list');
             const ul = document.createElement('ul');
             const urlParams = new URLSearchParams(window.location.search);
@@ -54,6 +64,11 @@ function loadCityData() {
             let selectedCityLocation = null;
 
             data.forEach(city => {
+                if (typeof city.lat !== 'number' || typeof city.lng !== 'number') {
+                    console.warn(`City data missing valid lat/lng for: ${city.name}`);
+                    return; 
+                }
+
                 const listItem = document.createElement('li');
                 listItem.textContent = city.name;
                 listItem.setAttribute('data-id', city.id);
@@ -66,32 +81,39 @@ function loadCityData() {
                     displayCityDetails(city.name, selectedCityLocation);
                 }
 
-                listItem.addEventListener('click', function () {
-                    const lat = parseFloat(this.getAttribute('data-lat'));
-                    const lng = parseFloat(this.getAttribute('data-lng'));
-                    const cityLocation = { lat, lng };
-
-                    infoWindow.close();
-
-                    panMapTo(cityLocation);
-                    animateMarkerTo(cityLocation, () => {
-                        displayCityDetails(this.textContent, cityLocation);
-                    });
-
-                    highlightSelectedCity(this);
-                    updateURLWithCityId(city.id);
-                });
+                listItem.addEventListener('click', () => handleCityClick(city, listItem));
                 ul.appendChild(listItem);
             });
 
             cityList.appendChild(ul);
 
             if (selectedCityLocation) {
-                panMapTo(selectedCityLocation);
-                animateMarkerTo(selectedCityLocation);
+                moveMapAndMarker(selectedCityLocation);
             }
         })
         .catch(error => console.error('Error loading city data:', error));
+}
+
+function handleCityClick(city, listItem) {
+    const lat = parseFloat(listItem.getAttribute('data-lat'));
+    const lng = parseFloat(listItem.getAttribute('data-lng'));
+    const cityLocation = { lat, lng };
+
+    infoWindow.close();
+    debounceMoveMapAndMarker(cityLocation, () => {
+        displayCityDetails(listItem.textContent, cityLocation);
+    });
+
+    highlightSelectedCity(listItem);
+    updateURLWithCityId(city.id);
+}
+
+let debounceTimeout;
+function debounceMoveMapAndMarker(newPosition, callback) {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        moveMapAndMarker(newPosition, callback);
+    }, 120); // Adjust the timeout as needed
 }
 
 function highlightSelectedCity(selectedItem) {
@@ -112,57 +134,11 @@ function updateURLWithCityId(cityId) {
     window.history.pushState({}, '', url);
 }
 
-function animateMarkerTo(newPosition, callback) {
-    const currentPosition = marker.getPosition();
-    const steps = 30;
-    const latStep = (newPosition.lat - currentPosition.lat()) / steps;
-    const lngStep = (newPosition.lng - currentPosition.lng()) / steps;
-
-    let currentStep = 0;
-
-    function moveMarker() {
-        currentStep++;
-        const nextPosition = {
-            lat: currentPosition.lat() + latStep * currentStep,
-            lng: currentPosition.lng() + lngStep * currentStep,
-        };
-
-        marker.setPosition(nextPosition);
-
-        if (currentStep < steps) {
-            requestAnimationFrame(moveMarker);
-        } else {
-            marker.setPosition(newPosition);
-            if (callback) callback();
-        }
-    }
-
-    requestAnimationFrame(moveMarker);
-}
-
-function panMapTo(newPosition) {
-    const currentPosition = map.getCenter();
-    const steps = 30;
-    const latStep = (newPosition.lat - currentPosition.lat()) / steps;
-    const lngStep = (newPosition.lng - currentPosition.lng()) / steps;
-
-    let currentStep = 0;
-
-    function moveMap() {
-        currentStep++;
-        const nextPosition = {
-            lat: currentPosition.lat() + latStep * currentStep,
-            lng: currentPosition.lng() + lngStep * currentStep,
-        };
-
-        map.setCenter(nextPosition);
-
-        if (currentStep < steps) {
-            requestAnimationFrame(moveMap);
-        } else {
-            map.setCenter(newPosition);
-        }
-    }
-
-    requestAnimationFrame(moveMap);
+function moveMapAndMarker(newPosition, callback) {
+    // Use requestAnimationFrame for smoother movement
+    window.requestAnimationFrame(() => {
+        map.panTo(newPosition);
+        marker.setPosition(newPosition);
+        if (callback) callback();
+    });
 }
