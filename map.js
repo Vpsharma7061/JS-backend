@@ -113,7 +113,7 @@ function debounceMoveMapAndMarker(newPosition, callback) {
     clearTimeout(debounceTimeout);
     debounceTimeout = setTimeout(() => {
         moveMapAndMarker(newPosition, callback);
-    }, 120); // Adjust the timeout as needed
+    }, 100); 
 }
 
 function highlightSelectedCity(selectedItem) {
@@ -135,7 +135,6 @@ function updateURLWithCityId(cityId) {
 }
 
 function moveMapAndMarker(newPosition, callback) {
-    // Use requestAnimationFrame for smoother movement
     window.requestAnimationFrame(() => {
         map.panTo(newPosition);
         marker.setPosition(newPosition);
