@@ -3,7 +3,12 @@
         "name": "New Delhi",
         "title": "New Delhi",
         "description": "New Delhi, the capital of India, is a vibrant city known for its rich history and cultural heritage. It is home to numerous historic monuments, government buildings, and vibrant markets.",
-        "image": "https://media.gettyimages.com/id/506812641/photo/india-gate.jpg?s=2048x2048&w=gi&k=20&c=czPojubj7yl33ztGOlUChwPJD2cfamQRKzCypE66aUQ=",
+        "images": [
+            "https://media.gettyimages.com/id/506812641/photo/india-gate.jpg?s=2048x2048&w=gi&k=20&c=czPojubj7yl33ztGOlUChwPJD2cfamQRKzCypE66aUQ=",
+            "https://cdn.britannica.com/20/189820-050-D650A54D/Red-Fort-Old-Delhi-India.jpg",
+            "https://cdn-ijnhp.nitrocdn.com/pywIAllcUPgoWDXtkiXtBgvTOSromKIg/assets/images/optimized/rev-5794eaa/www.jaypeehotels.com/blog/wp-content/uploads/2023/11/Blog-5.jpg",
+            "https://cdn.britannica.com/67/156667-050-62285333/Lotus-Temple-New-Delhi-India.jpg"
+        ],
         "landmarks": [
             "India Gate",
             "Red Fort",
@@ -16,7 +21,14 @@
         "name": "Gurugram",
         "title": "Gurugram",
         "description": "Gurugram, also known as Gurgaon, is a financial and technology hub located near New Delhi. It is famous for its modern skyscrapers, shopping malls, and vibrant nightlife.",
-        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW0CaUPzNzUHXRL5mU_7k4RHGI-zauQUx3RA&s",
+        "images": [
+            "https://media1.thrillophilia.com/filestore/a77mbnmbpmmxj2qzty2ws5iq7gax_1549091255_Nautanki_Mahal.jpg.jpg",
+            "https://winworldrealty.in/wp-content/uploads/2023/11/Why-New-Gurgaon-Become-The-Hotspot-Real-Estate-Destination-In-Delhi-NCR.jpg",
+            "https://travelsetu.com/apps/uploads/new_destinations_photos/destination/2024/01/08/9a59b649393e4ec964f3c2b399542338_1000x1000.jpg"
+
+
+          
+        ],
         "landmarks": [
             "Kingdom of Dreams",
             "Cyber Hub",
@@ -27,7 +39,12 @@
         "name": "Faridabad",
         "title": "Faridabad",
         "description": "Faridabad is an industrial city in the state of Haryana. It is known for its greenery, historic sites, and being a significant commercial hub in the region.",
-        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ52lvHZbb3wFexSlA8aIZXuefPQfFE14liw&s",
+        "images": [
+            "https://travelsetu.com/apps/uploads/new_destinations_photos/destination/2024/01/08/b7e2529ae29de31da1fd87f80e4656f0_1000x1000.jpg",
+            "https://i.ytimg.com/vi/L7ofq6KqrDU/maxresdefault.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqc-JxVqPX1S5svn-UXuz9C7TCDtqrvlqMMA&s"
+            
+        ],
         "landmarks": [
             "Surajkund",
             "Badkhal Lake",
@@ -38,7 +55,13 @@
         "name": "Ghaziabad",
         "title": "Ghaziabad",
         "description": "Ghaziabad is a bustling city in Uttar Pradesh, often referred to as the 'Gateway to Uttar Pradesh.' It has a mix of historical attractions and modern infrastructure.",
-        "image": "https://media.gettyimages.com/id/506812641/photo/india-gate.jpg?s=2048x2048&w=gi&k=20&c=czPojubj7yl33ztGOlUChwPJD2cfamQRKzCypE66aUQ=",
+        "images": [
+          "https://farm1.staticflickr.com/760/20962162803_356355f9bd_z.jpg",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrEGthHH7JZCcZcNFmKqBmUfvjIr8UXk6LIg&s",
+          "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/31/6f/df/img-20171106-152245-largejpg.jpg?w=1200&h=-1&s=1"
+
+
+        ],
         "landmarks": [
             "Siddhivinayak Temple",
             "City Forest",
@@ -49,7 +72,11 @@
         "name": "Noida",
         "title": "Noida",
         "description": "Noida is a planned city located in Uttar Pradesh. It is known for its contemporary lifestyle, IT parks, shopping complexes, and excellent infrastructure.",
-        "image": "https://media.gettyimages.com/id/506812641/photo/india-gate.jpg?s=2048x2048&w=gi&k=20&c=czPojubj7yl33ztGOlUChwPJD2cfamQRKzCypE66aUQ=",
+        "images": [
+            "https://img.staticmb.com/mbcontent/images/crop/uploads/2023/6/Outside-view-of-The-Great-India-Mall-Noida_0_1200.jpg",
+            "https://img.etimg.com/thumb/width-1200,height-900,imgsize-85562,resizemode-75,msid-111348062/news/india/up-govt-says-noida-film-city-project-to-create-50000-jobs-benefit-5-7-lakh-people-indirectly.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGUop5kso8K8i9w2CTm_OcBf00GrTwNILbaA&s"
+        ],
         "landmarks": [
             "Great India Place",
             "Noida Film City",

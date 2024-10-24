@@ -1,14 +1,78 @@
-/* Map styling */
 #map {
     height: 90vh;
-    width: calc(100% - 17%); /* Adjusts the width dynamically based on the button container's width */
+    width: calc(100% - 17%);
     margin-bottom: 10px;
     position: relative;
     float: right;
-    transition: width 0.3s ease; /* Smooth transition when the sidebar expands */
 }
 
-/* Button Container styling */
+#button-container {
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    width: 6%;
+    background-color: #a8afbe;
+    padding: 10px;
+    align-items: flex-start;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    clear: both;
+}
+
+.slider-line {
+    flex-basis: 80%;
+    height: 4px;
+    background-color: rgba(0, 123, 255, 0.3);
+    margin: 0 5px;
+    border-radius: 2px;
+}
+
+.slider-icon {
+    cursor: pointer;
+    font-size: 24px;
+    user-select: none;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(0, 123, 255, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.slider-icon:hover {
+    background-color: rgba(0, 123, 255, 0.5);
+}
+
+.slider-icon::before {
+    content: ''; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 123, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.slider-icon:hover::before {
+    opacity: 1;
+}
+
 #button-container {
     display: flex;
     flex-direction: column;
@@ -18,24 +82,22 @@
     height: 90vh;
     width: 6%;
     background-color: #a8afbe;
-    transition: width 0.3s ease; /* Smooth transition for expansion */
+    transition: width 0.3s ease;
     padding: 10px;
     align-items: flex-start;
-    box-sizing: border-box; /* Include padding in the width calculation */
-    overflow: hidden; /* Prevent overflow issues */
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 #button-container.expanded {
     width: 17%;
 }
 
-/* Button Group styling */
 #button-group {
     display: flex;
     margin-bottom: 20px;
 }
 
-/* Location Button styling */
 #location-button {
     background-color: yellow;
     border: none;
@@ -46,9 +108,8 @@
     margin-right: 10px;
 }
 
-/* Toggle Button styling */
 #toggle-button {
-    display: none; /* Hidden by default */
+    display: none;
     background-color: yellow;
     border: none;
     border-radius: 5px;
@@ -57,12 +118,10 @@
     font-size: 16px;
 }
 
-/* Arrow Toggle styling */
-/* Arrow Toggle styling */
 #arrow-toggle {
     position: absolute;
     top: 50%;
-    right: 1px; /* Adjusted to ensure it's always visible */
+    right: 1px;
     width: 30px;
     height: 30px;
     background-color: #007bff;
@@ -78,17 +137,15 @@
 }
 
 #button-container.expanded #arrow-toggle {
-    right: 1px; /* Keeps the toggle button in place when expanded */
+    right: 1px;
 }
 
 #arrow-toggle:hover {
-    background-color: #0056b3; /* Darker color on hover */
+    background-color: #0056b3;
 }
 
-
-/* Cities List styling */
 #cities-list {
-    display: none; /* Hidden by default */
+    display: none;
     margin-top: 10px;
     padding: 10px;
     width: 100%;
@@ -112,12 +169,9 @@
 }
 
 #cities-list li:hover {
-    background-color: rgba(222, 236, 34, 0.475); /* Light blue background on hover */
+    background-color: rgba(222, 236, 34, 0.475);
 }
 
-
-
-/* Utility classes */
 .hidden {
     display: none;
 }

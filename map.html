@@ -10,32 +10,37 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=location_on" />
 </head>
 <body>
-    <div id="map"></div>
     
-   
-    <div id="button-container">
-        <div id="arrow-toggle">▶</div>
-        <div id="button-group">
-            <button id="location-button" title="Show New Delhi Location">
-                <span class="material-symbols-outlined">location_on</span>
-            </button>
-            <button id="toggle-button">Delhi Landmarks
-                <span id="toggle-arrow">▼</span>
-            </button>
-            
+        <div id="map"></div>
+    
+        <div id="button-container">
+            <div id="arrow-toggle">▶</div>
+            <div id="button-group">
+                <button id="location-button" title="Show New Delhi Location">
+                    <span class="material-symbols-outlined">location_on</span>
+                </button>
+                <button id="toggle-button">Delhi Landmarks
+                    <span id="toggle-arrow">▼</span>
+                </button>
+            </div>
+    
+            <div id="cities-list" class="cities-list"></div>
         </div>
-        <div id="cities-list" class="cities-list"></div>
-    </div>
     
-    <div id="city-info" class="city-info">
-       
-        <img src="" alt="City Image" id="city-image">
-      
-        <ul id="city-landmarks"></ul>
-    </div>
+        
+        <div class="slider-container">
+            <div class="slider-icon" id="previous-icon">◀</div>
+            <div class="slider-line"></div>
+            <div class="slider-icon" id="next-icon">▶</div>
+        </div>
+        
     
-
-    <ul id="city-list" class="hidden"></ul>
+        <div id="city-info" class="city-info">
+           <ul id="city-landmarks"></ul>
+        </div>
+        
+        <ul id="city-list" class="hidden"></ul>
+  
     
 
    
@@ -44,6 +49,9 @@
     
     <script src="Displaycitydetails.js"></script>
     <script src="toggle.js"></script>
+    
+    
+    
     
 </body>
 </html>

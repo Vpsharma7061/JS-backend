@@ -1,6 +1,4 @@
-let map;
-let marker;
-let infoWindow;
+let map, marker, infoWindow, currentIndex = 0, citiesData = [];
 
 function initMap() {
     const initialLocation = { lat: 28.6563, lng: 77.2321 };
@@ -24,87 +22,65 @@ function initMap() {
 
     infoWindow = new google.maps.InfoWindow();
 
-    loadCityData();
-    attachMarkerListeners();
+    google.maps.event.addListenerOnce(map, 'idle', () => {
+        loadCityData();
+        attachMarkerListeners();
+    });
 }
 
 function attachMarkerListeners() {
-    marker.addListener('mouseover', () => {
-        infoWindow.open(map, marker);
-    });
-
-    marker.addListener('mouseout', () => {
-        infoWindow.close();
-    });
-
-    map.addListener('click', () => {
-        infoWindow.close();
-    });
+    marker.addListener('mouseover', () => infoWindow.open(map, marker));
+    marker.addListener('mouseout', () => infoWindow.close());
+    map.addListener('click', () => infoWindow.close());
 }
 
 function loadCityData() {
     fetch('cities.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            if (!Array.isArray(data) || data.length === 0) {
-                console.warn('City data is not an array or is empty');
-                return;
-            }
-
-            const cityList = document.getElementById('cities-list');
-            const ul = document.createElement('ul');
-            const urlParams = new URLSearchParams(window.location.search);
-            const selectedCityId = urlParams.get('city');
-
-            let selectedCityLocation = null;
-
-            data.forEach(city => {
-                if (typeof city.lat !== 'number' || typeof city.lng !== 'number') {
-                    console.warn(`City data missing valid lat/lng for: ${city.name}`);
-                    return; 
-                }
-
-                const listItem = document.createElement('li');
-                listItem.textContent = city.name;
-                listItem.setAttribute('data-id', city.id);
-                listItem.setAttribute('data-lat', city.lat);
-                listItem.setAttribute('data-lng', city.lng);
-
-                if (city.id === selectedCityId) {
-                    selectedCityLocation = { lat: city.lat, lng: city.lng };
-                    highlightSelectedCity(listItem);
-                    displayCityDetails(city.name, selectedCityLocation);
-                }
-
-                listItem.addEventListener('click', () => handleCityClick(city, listItem));
-                ul.appendChild(listItem);
-            });
-
-            cityList.appendChild(ul);
-
-            if (selectedCityLocation) {
-                moveMapAndMarker(selectedCityLocation);
-            }
+            if (!Array.isArray(data) || data.length === 0) return;
+            citiesData = data;
+            populateCityList();
+            setInitialCity();
         })
-        .catch(error => console.error('Error loading city data:', error));
+        .catch(console.error);
+}
+
+function populateCityList() {
+    const cityList = document.getElementById('cities-list');
+    cityList.innerHTML = '';
+    const ul = document.createElement('ul');
+    
+    citiesData.forEach(city => {
+        const listItem = document.createElement('li');
+        listItem.textContent = city.name;
+        listItem.setAttribute('data-id', city.id);
+        listItem.setAttribute('data-lat', city.lat);
+        listItem.setAttribute('data-lng', city.lng);
+        listItem.addEventListener('click', () => handleCityClick(city, listItem));
+        ul.appendChild(listItem);
+    });
+
+    cityList.appendChild(ul);
+}
+
+function setInitialCity() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedCityId = urlParams.get('city');
+    currentIndex = citiesData.findIndex(city => city.id === selectedCityId);
+    if (currentIndex === -1) currentIndex = 0;
+    const selectedCityLocation = { lat: citiesData[currentIndex].lat, lng: citiesData[currentIndex].lng };
+    moveMapAndMarker(selectedCityLocation);
+    highlightSelectedCity(citiesData[currentIndex].id);
+    displayCityDetails(citiesData[currentIndex].name, selectedCityLocation);
 }
 
 function handleCityClick(city, listItem) {
     const lat = parseFloat(listItem.getAttribute('data-lat'));
     const lng = parseFloat(listItem.getAttribute('data-lng'));
     const cityLocation = { lat, lng };
-
-    infoWindow.close();
-    debounceMoveMapAndMarker(cityLocation, () => {
-        displayCityDetails(listItem.textContent, cityLocation);
-    });
-
-    highlightSelectedCity(listItem);
+    debounceMoveMapAndMarker(cityLocation, () => displayCityDetails(city.name, cityLocation));
+    highlightSelectedCity(city.id);
     updateURLWithCityId(city.id);
 }
 
@@ -113,19 +89,19 @@ function debounceMoveMapAndMarker(newPosition, callback) {
     clearTimeout(debounceTimeout);
     debounceTimeout = setTimeout(() => {
         moveMapAndMarker(newPosition, callback);
-    }, 100); 
+    }, 100);
 }
 
-function highlightSelectedCity(selectedItem) {
-    const allCities = document.querySelectorAll('#cities-list li');
-
-    allCities.forEach(city => {
-        city.style.backgroundColor = '';
-        city.style.fontWeight = '';
+function highlightSelectedCity(cityId) {
+    document.querySelectorAll('#cities-list li').forEach(city => {
+        if (city.getAttribute('data-id') === cityId) {
+            city.style.backgroundColor = '#fafc4c';
+            city.style.fontWeight = 'bold';
+        } else {
+            city.style.backgroundColor = '';
+            city.style.fontWeight = '';
+        }
     });
-
-    selectedItem.style.backgroundColor = '#fafc4c';
-    selectedItem.style.fontWeight = 'bold';
 }
 
 function updateURLWithCityId(cityId) {
@@ -135,9 +111,29 @@ function updateURLWithCityId(cityId) {
 }
 
 function moveMapAndMarker(newPosition, callback) {
-    window.requestAnimationFrame(() => {
-        map.panTo(newPosition);
-        marker.setPosition(newPosition);
-        if (callback) callback();
-    });
+    map.panTo(newPosition);
+    marker.setPosition(newPosition);
+    if (callback) callback();
 }
+
+document.getElementById('next-icon').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % citiesData.length;
+    updateCity(currentIndex);
+});
+
+document.getElementById('previous-icon').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + citiesData.length) % citiesData.length;
+    updateCity(currentIndex);
+});
+
+function updateCity(index) {
+    const city = citiesData[index];
+    if (city) {
+        const cityLocation = { lat: city.lat, lng: city.lng };
+        moveMapAndMarker(cityLocation, () => displayCityDetails(city.name, cityLocation));
+        highlightSelectedCity(city.id);
+        updateURLWithCityId(city.id);
+    }
+}
+
+initMap();
