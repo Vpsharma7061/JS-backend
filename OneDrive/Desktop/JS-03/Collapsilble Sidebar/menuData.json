@@ -1,0 +1,60 @@
+[
+    {
+        "title": "Home",
+        "icon": "fas fa-home",
+        "subMenu": []
+    },
+    {
+        "title": "About",
+        "icon": "fas fa-info-circle",
+        "subMenu": [
+            {
+                "title": "Team",
+                "icon": "fas fa-users",
+                "subMenu": [
+                    {
+                        "title": "Management",
+                        "icon": "fas fa-user-tie",
+                        "subMenu": []
+                    },
+                    {
+                        "title": "Development",
+                        "icon": "fas fa-code",
+                        "subMenu": []
+                    },
+                    {
+                        "title": "Marketing",
+                        "icon": "fas fa-bullhorn",
+                        "subMenu": []
+                    }
+                ]
+            },
+            {
+                "title": "Company",
+                "icon": "fas fa-building",
+                "subMenu": []
+            }
+        ]
+    },
+    {
+        "title": "Services",
+        "icon": "fas fa-cogs",
+        "subMenu": [
+            {
+                "title": "Web Development",
+                "icon": "fas fa-code",
+                "subMenu": []
+            },
+            {
+                "title": "SEO Optimization",
+                "icon": "fas fa-search",
+                "subMenu": []
+            }
+        ]
+    },
+    {
+        "title": "Contact",
+        "icon": "fas fa-phone",
+        "subMenu": []
+    }
+]
